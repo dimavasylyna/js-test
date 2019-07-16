@@ -11,7 +11,7 @@ window.onload = function() {
 	
 
 	addQuestionBtn.addEventListener(`click`, function() {
-		  addQuestion();		
+		  addQuestion();
 	});
 
 
@@ -19,7 +19,7 @@ window.onload = function() {
 	let addQuestion = () => {
 		let newCreatorItem = creatorItem.cloneNode(true);
 		creatorList.appendChild(newCreatorItem);
-
+		setClassCounter(`.creator__item`, `q`);
 		// ставимо прослуховування кліку для створеного блоку
 		newCreatorItem.addEventListener(`click`, function(e){
 			let removeQuestionBtn = this.querySelector(`.remove-question`);
@@ -27,6 +27,7 @@ window.onload = function() {
 
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
+				setClassCounter(`.creator__item`, `q`);
 			} else if (e.target === addAnswerBtn) {
 				addAnswer(this);
 			}
@@ -52,7 +53,17 @@ window.onload = function() {
 	}
 
 
+	let setClassCounter = (classForSearch, addClassName) => {
+		let elements = document.querySelectorAll(classForSearch);
+		elements.forEach((el, i)=>{
+			
+			console.log(el.className.match(/q\d+/g));
+					
+			
+			el.classList.add(`${addClassName}${i+1}`);
 
+		});
+	}
 
 };
 

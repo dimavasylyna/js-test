@@ -23,6 +23,7 @@
 	    }
 	}
 
+	// клік на end-create-test
 	endTestBuildBtn.addEventListener(`click`, function() {
 		
 		testDataObject = {};
