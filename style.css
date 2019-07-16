@@ -1,0 +1,46 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.creator__item {
+	border: 1px solid black;
+}
+
+.btn {
+	font-size: 20px;
+	padding: 10px;
+	cursor: pointer;
+	margin-top: 20px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	max-width: 200px;
+}
+.add-answer {
+	margin-right: 0;
+	margin-left: 0;
+	max-width: 300px;
+}
+
+.answer-variant {
+	list-style-type: upper-alpha;
+}
+
+.answer:first-of-type .right-answer {
+	position: relative;
+}
+ .answer:first-of-type .right-answer::before {
+	content: 'Відмічайте вірні відповіді';
+	position: absolute;
+	top: -50px;
+	left: 0;
+	width: 300px;
+	display: block;
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		
+			<p class="info">* якщо запитання передбачає текстову відповідь, то вводимо тільки текст запитання</p>
+			<ol class="creator__list">
+				
+			</ol>
+			<button class="btn add-question">Додати запитання</button>
+			<button class="btn end-create-test">Завершити створення тесту</button>
+	</div>
+
+
+	<template class="template--creator-item">
+		<li class="creator__item">
+				<label class="creator__label">
+					<p class="creator__label-text">Введіть текст запитання:</p>
+					<textarea rows="3" class="question-text"></textarea>
+				</label>
+				<ul class="answer-variant">
+					<p> Введіть текст відповіді:</p>
+				</ul>
+				<button class="btn add-answer">Додати варіант відповіді</button>
+				
+				<button class="btn remove-question">Видалити запитання</button>
+			</li>
+	</template>
+	<template class="template--answer">
+		<li class="answer">
+			<label class="answer__label">
+				<textarea rows="2" class="answer-text"></textarea>
+			</label>
+			<button class="remove-answer">х</button>
+			<label class="right-answer">
+				<input type="checkbox">
+			</label>
+		</li>
+	</template>
+	<template class="template--result-page">
+		<div class="container-here">
+			<div class="container">
+				<form class="test">
+					<ol class="test__list"></ol>
+					<button class="test-end btn">Завершити тест</button>
+				</form>
+			</div>
+		</div>
+		<div class="styles-here">
+		<style>
+			a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:"";content:none}table{border-collapse:collapse;border-spacing:0}br{font-size:0}*{box-sizing:border-box}a,a:focus,button,button:focus,input,input:focus{outline:0}a{text-decoration:none}button{border:none}::-moz-focus-inner,::-moz-focus-outer{border:0;padding:0}a:-moz-focusring,select:-moz-focusring{color:transparent;text-shadow:0 0 0 #000}:active,:focus,:hover,:visited{outline:0!important}a,a:active,a:focus,a:hover,a:visited{outline:0!important}::-moz-focus-inner{border:0;outline:0}*,::after,::before{box-sizing:border-box}html{height:100%}body{font-family:Roboto,sans-serif;font-size:18px;line-height:28px;color:#000;background-color:#ecf4ff;overflow-x:hidden;width:100%}input::-ms-clear{display:none}.main{width:100%}.container{width:100%;max-width:1220px;margin:0 auto;padding:0 25px;padding-top:40px}.test__list{counter-reset:section}.question__block{margin-bottom:30px;background-color:#fff;margin-left:40px;box-shadow:0 0 15px rgba(0,0,0,.2);border-radius:15px;padding:15px 30px;display:flex;flex-direction:column;justify-content:center;position:relative}.question__block::before{content:counter(section);counter-increment:section;position:absolute;left:-44px;top:50%;transform:translateY(-50%);font-size:20px;background-color:#fff;display:flex;justify-content:center;align-items:center;height:34px;width:34px;border-radius:50%;z-index:-1;box-shadow:0 0 15px rgba(0,0,0,.2)}.question__block:last-of-type{margin-bottom:0}.question__text{font-size:18px;margin-bottom:8px}.answer{font-size:16px;display:block;padding-left:26px}textarea{background-color:#fff;box-shadow:inset 1px 1px 5px 0 rgba(0,0,0,.2);border:none;padding:6px 10px;font-size:17px;min-height:50px;max-width:300px;width:100%}.answer-variant{position:relative}input[type=checkbox],input[type=radio]{opacity:0;position:absolute}input+label{cursor:pointer}input+label::before{content:'';display:block;position:absolute;height:15px;background-color:rgba(255,255,255,0);width:15px;border:1px solid rgba(0,0,0,.6);left:3px;top:6px}label:hover::before{background-color:#e8e8e8}input:checked+label::before{background-color:#87a0c2}.btn{font-size:20px;font-weight:700;line-height:1;color:#fff;outline:0;background-image:linear-gradient(to right,#92a4bd 0,#6894d0 50%,#7795bd 100%);border:none;box-shadow:0 5px #506d94,0 9px 8px rgba(61,61,61,.5);border-radius:6px;padding:12px 10px 13px 10px;display:block;width:100%;max-width:180px;margin-left:auto;margin-right:auto;cursor:pointer;font-family:inherit;transition:.1s;margin-top:40px;margin-bottom:40px}.btn:hover{transition:.3s;background-position:0 100px}.btn:active{transition:.1s;transform:translateY(4px);box-shadow:0 0 #547737,0 9px 8px rgba(61,61,61,.2)}.result{background-color:#2d4a71;color:#fff;box-shadow:0 0 15px rgba(0,0,0,.2);border-radius:15px;padding:15px 30px;display:flex;flex-direction:column;justify-content:center;font-size:22px;margin-top:50px;margin-bottom:50px;margin-left:40px}.invalid{position:relative;box-shadow:0 0 0 1px red}.invalid::after{content:'Не залишайте цей блок пустим!';position:absolute;bottom:0;right:0;transform:translateY(100%);font-size:14px;color:red}
+		</style>
+	</div>
+	<div class="test-data-object-box">
+		<script class="test-data-object"></script>
+	</div>
+	<div class="script-here">
+		<script>
+			window.onload = function() {
+	let obj = JSON.parse(document.querySelector(`.test-data-object`).textContent);
+	console.log(obj);
+	// обєкт з вірними відповідями для автоматичного підрахунку балів
+	let answer = obj;
+	for (let key in answer) {
+		if (!answer[key].hasOwnProperty(`rightAnswer`)) {
+			delete answer[key];
+		}
+	}
+	console.log(answer);
+		
+
+	// test - основний обєкт, де зберігатимуться всі дані
+	let test = {};
+	const btn = document.querySelector(`.test-end`);
+	const form = document.querySelector(`.test`);
+	// блоки запитань
+	let testItems = [...document.querySelectorAll(`.question__block`)];
+	// сюди будемо виводити відповіді на сторінці
+	let container = document.querySelector(`.container`);
+
+	// якщо answerReadyForRender є в LS, то виводимо відповіді
+	if (localStorage.getItem(`answerReadyForRender`)) {
+		renderAnswer();
+	}
+
+	form.addEventListener(`submit`, function(e) {
+		e.preventDefault();
+		setData();
+		if (checkValide()) {
+			autoScore();
+			renderAnswer();
+		} else {
+			return;
+		}
+	});
+
+
+
+	
+	// проставляє блокам запитань класи і створює ключі з відповідних класів у обєкті test
+	function prepare() {
+		testItems.forEach((el, i)=>{
+			el.classList.add(`q${i+1}`);
+			test[`q${i+1}`] = {};
+		});
+	}
+	prepare();
+
+	// збирає всі запитання і відповіді, які є на сторінці і поміщаємо в test
+	function setData() {
+		for (let key in test) {
+			test[key][`question`] = document.querySelector(`\.${key} \.question__text`).textContent;
+			test[key][`answer`] = [...document.querySelectorAll(`\.${key} input:checked, \.${key} textarea`)].map((el)=>el.value);
+		}
+		// ставимо обєкт test в local storage
+		localStorage.setItem(`test`, JSON.stringify(test));
+	}
+
+	// виводить всі обрані відповіді на сторінку разом з запитаннями
+	function renderAnswer() {
+		test = JSON.parse(localStorage.getItem(`test`));
+
+		let fragment = document.createDocumentFragment();
+		let renderList = document.createElement(`ol`);
+		renderList.classList.add(`test__list`);
+		for (let key in test) {	
+			let renderItem = document.createElement(`li`);
+			renderItem.classList.add(`question__block`);
+			let renderQuestionText = document.createElement(`p`);
+			let renderAnswerText = document.createElement(`p`);
+			
+			renderQuestionText.textContent = test[key][`question`];
+			renderAnswerText.textContent = test[key][`answer`].join(`; `);
+			renderItem.appendChild(renderQuestionText);
+			renderItem.appendChild(renderAnswerText);
+			renderList.appendChild(renderItem);
+		}
+		fragment.appendChild(renderList);
+		container.innerHTML = ``;
+		container.appendChild(fragment);
+		// виводимо результат
+		renderScore();
+	}
+
+	// автоматично підраховує бали за тестові відповіді
+	function autoScore() {
+		let score = 0;
+		for (let key in answer) {
+			// збирає всі вірні відповіді і плюсує score
+			 answer[key][`answer`].forEach((el)=>{
+				if (test[key][`answer`].indexOf(el) != -1) {
+					score += 1/answer[key][`answer`].length;
+				}
+			});
+		}
+		// округляємо значення до десятих
+		return Math.round(score * 10) / 10;
+	}
+
+	// рахує максимальну можливу кількість балів за тестові відповіді
+	function countMaxPossibleScore() {
+		let count = 0;
+		// якщо кожна відповідь оцінюється в 1 бал
+		// for (let key in answer) {
+		// 	answer[key][`answer`].forEach(()=>{count++});
+		// }
+
+		// якщо кожне питання оцінюється в 1 бал (якщо 2 відповіді, то по 0.5, якщо 3, то - 0.33)
+		for (let key in answer) {
+			count++;
+		}
+		return count;
+	}
+	
+	// виводить автоматично підрахований результат
+	function renderScore() {
+		let result = document.createElement(`p`);
+		result.classList.add(`result`);
+		result.textContent = `Результат: ${autoScore()} з ${countMaxPossibleScore()} балів`
+		container.appendChild(result);
+	}
+
+
+	// перевіряє на заповнення поля
+	function checkValide() {
+		let count = 0;
+		// шукаємо блоки без відповіді
+		for (let key in test) {
+			if (test[key][`answer`].length === 0 || test[key][`answer`][0].trim() === ``) {
+				document.querySelector(`.${key}`).classList.remove(`invalid`);
+				document.querySelector(`.${key}`).classList.add(`invalid`);
+				count++;
+			}  else {
+				document.querySelector(`.${key}`).classList.remove(`invalid`);
+			}
+		}
+		// якщо є хоча б один блок без відповіді, вертаємо false
+		if (count>0) {
+			return false;
+		} else {
+			localStorage.setItem(`answerReadyForRender`, `true`);
+			return true;
+		}
+	}
+	
+
+}
+
+		</script>
+	</div>
+	</template>
+	<!-- <script src="renderTest.js"></script> -->
+	<script src="interface.js"></script>
+	<script src="findData.js"></script>
+	<script src="buildPage.js"></script>
+</body>
+</html>
