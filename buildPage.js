@@ -25,15 +25,20 @@
 
 	// клік на end-create-test
 	endTestBuildBtn.addEventListener(`click`, function() {
-		
+		// очищаємо обєкт для оновлення даних
 		testDataObject = {};
-		findAllData();
+		// оновлюємо дані обєкта
+		let allDataObject = findAllData();
 		if (testList.innerHTML.length > 0) {
+			// очищаємо розмітку
 			testList.innerHTML = ``;
 		}
+		// оновлюємо розмітку
 		generateQuestions();
 		console.log(testList);
 		console.log(testDataObject);
+
+		generateTestPage(allDataObject);
 	});
 
 	
@@ -96,7 +101,26 @@
 	}
 	
 	
-	
+	let generateTestPage = (allDataObject) => {
+		// контейнер DOM, де буде зберігатися обєкт з даними
+		let dataObjectDOM = resultDOM.querySelector(`.test-data-object-box`);
+		dataObjectDOM.querySelector(`.test-data-object`).innerHTML = JSON.stringify(allDataObject);
+
+		let beforeContainer = `<!DOCTYPE html> 
+				<html lang="en"> 
+					<head> 
+						<meta charset="UTF-8"> 
+						<title>Document</title> 
+						
+					</head> 
+					<body>`;
+		let afterContainer = `</body></html>`;
+		let container = resultDOM.querySelector(`.container-here`).innerHTML;
+		let styles = resultDOM.querySelector(`.styles-here`).innerHTML;
+		let scripts = resultDOM.querySelector(`.script-here`).innerHTML;
+		// зберігаємо сторінку в файл
+		download(`${beforeContainer}${container}${afterContainer}${styles}${scripts}${dataObjectDOM.innerHTML}`, `index`, `text/html`);
+	}
 
 
 }

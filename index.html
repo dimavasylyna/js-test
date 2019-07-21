@@ -57,15 +57,15 @@
 		</style>
 	</div>
 	<div class="test-data-object-box">
-		<script class="test-data-object"></script>
+		<p class="test-data-object"></p>
 	</div>
 	<div class="script-here">
 		<script>
 			window.onload = function() {
-	let obj = JSON.parse(document.querySelector(`.test-data-object`).textContent);
-	console.log(obj);
 	// обєкт з вірними відповідями для автоматичного підрахунку балів
-	let answer = obj;
+	let answer = JSON.parse(document.querySelector(`.test-data-object`).textContent);
+	
+	// видаляємо значення, які не містять тестових відповідей
 	for (let key in answer) {
 		if (!answer[key].hasOwnProperty(`rightAnswer`)) {
 			delete answer[key];
@@ -119,6 +119,7 @@
 		}
 		// ставимо обєкт test в local storage
 		localStorage.setItem(`test`, JSON.stringify(test));
+		console.log(test);
 	}
 
 	// виводить всі обрані відповіді на сторінку разом з запитаннями
@@ -152,9 +153,9 @@
 		let score = 0;
 		for (let key in answer) {
 			// збирає всі вірні відповіді і плюсує score
-			 answer[key][`answer`].forEach((el)=>{
-				if (test[key][`answer`].indexOf(el) != -1) {
-					score += 1/answer[key][`answer`].length;
+			 test[key][`answer`].forEach((el)=>{
+				if (answer[key][`rightAnswer`].indexOf(el) != -1) {
+					score += 1/answer[key][`rightAnswer`].length;
 				}
 			});
 		}
