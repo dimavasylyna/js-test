@@ -45,6 +45,8 @@ window.onload = function() {
 		let addAnswerBtn = cloneContainer.querySelector(`.add-answer`);
 		let copyBtn = cloneContainer.querySelector(`.copy-answer`);
 		let removeAnswerBtn = cloneContainer.querySelector(`.remove-answer`);
+
+
 		cloneContainer.addEventListener(`click`, function(e) {
 			if (e.target === removeAnswerBtn) {
 				removeElement(cloneContainer);

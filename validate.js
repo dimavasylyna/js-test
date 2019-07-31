@@ -1,15 +1,25 @@
 window.isValide = (obj) => {
+	console.log(obj);
+
+	
+	let hasEmpty = (arr)=> {
+		arr.some((elem)=>{
+			console.log(elem.trim().length === 0);
+			return elem.trim().length === 0;
+		});
+	}
 
 	let checkObjQuestion = (obj) => {
 		for (let q in obj) {
 			if (obj[q].question.length === 0) {
-				console.log(obj[q].question.length);
 				return false;
 			} 
 		}
 		return true;
 	}
+	
 
+	
 	
 	
 	if (Object.keys(obj).length === 0 && obj.constructor === Object) {
@@ -18,8 +28,7 @@ window.isValide = (obj) => {
 	} else if (!checkObjQuestion(obj)) {
 		alert(`Не всі поля заповнені!`);
 		return false;
-	} 
-	 else {
+	}  else {
 	 	return true;
 	 }
 }
