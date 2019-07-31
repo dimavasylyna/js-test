@@ -48,7 +48,9 @@ window.onload = function() {
 
 
 		cloneContainer.addEventListener(`click`, function(e) {
-			if (e.target === removeAnswerBtn) {
+			if (e.target === removeQuestionBtn) {
+				removeElement(this);
+			} else if (e.target === removeAnswerBtn) {
 				removeElement(cloneContainer);
 			} else if (e.target === addAnswerBtn) {
 				addAnswer(cloneContainer);
