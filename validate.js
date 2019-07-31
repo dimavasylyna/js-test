@@ -1,14 +1,25 @@
 window.isValide = (obj) => {
-	console.log(obj);
 
 	
 	let hasEmpty = (arr)=> {
-		arr.some((elem)=>{
-			console.log(elem.trim().length === 0);
-			return elem.trim().length === 0;
-		});
+		if (arr) {
+			let result = arr.some((elem)=>{
+				return elem.length === 0;
+			});
+			return result;
+		}
+		
 	}
 
+	let checkObjAnswer = (obj) => {
+		for (let q in obj) {
+			if (hasEmpty(obj[q].answer)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	let checkObjQuestion = (obj) => {
 		for (let q in obj) {
 			if (obj[q].question.length === 0) {
@@ -17,7 +28,14 @@ window.isValide = (obj) => {
 		}
 		return true;
 	}
-	
+	let checkObjRightAnswer = (obj) => {
+		for (let q in obj) {
+			if (obj[q].answer && !obj[q].rightAnswer) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	
 	
@@ -27,6 +45,12 @@ window.isValide = (obj) => {
 		return false;
 	} else if (!checkObjQuestion(obj)) {
 		alert(`Не всі поля заповнені!`);
+		return false;
+	} else if (!checkObjAnswer(obj)) {
+		alert(`Не всі відповіді заповнені!`);
+		return false;
+	} else if (!checkObjRightAnswer(obj)) {
+		alert(`Не вказано вірних відповідей для автопідрахунку`);
 		return false;
 	}  else {
 	 	return true;
