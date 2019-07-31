@@ -44,3 +44,7 @@ body {
 	width: 300px;
 	display: block;
 }
+
+.error {
+	outline: 2px solid red;
+}
