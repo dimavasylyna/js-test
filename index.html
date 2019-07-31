@@ -27,7 +27,7 @@
 					<p> Введіть текст відповіді:</p>
 				</ul>
 				<button class="btn add-answer">Додати варіант відповіді</button>
-				
+				<button class="btn copy-answer">Зробити копію блока запитання</button>
 				<button class="btn remove-question">Видалити запитання</button>
 			</li>
 	</template>
@@ -57,13 +57,14 @@
 		</style>
 	</div>
 	<div class="test-data-object-box">
-		<p class="test-data-object"></p>
+		<p class="test-data-object" style="display: none;"></p>
 	</div>
 	<div class="script-here">
 		<script>
 			window.onload = function() {
 	// обєкт з вірними відповідями для автоматичного підрахунку балів
 	let answer = JSON.parse(document.querySelector(`.test-data-object`).textContent);
+	document.querySelector(`.test-data-object`).remove();
 	
 	// видаляємо значення, які не містять тестових відповідей
 	for (let key in answer) {
@@ -216,6 +217,7 @@
 	</div>
 	</template>
 	<!-- <script src="renderTest.js"></script> -->
+	<script src="validate.js"></script>
 	<script src="interface.js"></script>
 	<script src="findData.js"></script>
 	<script src="buildPage.js"></script>

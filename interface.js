@@ -24,17 +24,37 @@ window.onload = function() {
 		newCreatorItem.addEventListener(`click`, function(e){
 			let removeQuestionBtn = this.querySelector(`.remove-question`);
 			let addAnswerBtn = this.querySelector(`.add-answer`);
-
+			let copyBtn = this.querySelector(`.copy-answer`);
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
 			} else if (e.target === addAnswerBtn) {
 				addAnswer(this);
+			} else if (e.target === copyBtn) {
+				copyBlock(this);
 			}
 		});
 	}
 
 	let removeElement = (element) => {
 		element.remove();
+	}
+
+	let copyBlock = (container) => {
+		let cloneContainer = container.cloneNode(true);
+		let removeQuestionBtn = cloneContainer.querySelector(`.remove-question`);
+		let addAnswerBtn = cloneContainer.querySelector(`.add-answer`);
+		let copyBtn = cloneContainer.querySelector(`.copy-answer`);
+		let removeAnswerBtn = cloneContainer.querySelector(`.remove-answer`);
+		cloneContainer.addEventListener(`click`, function(e) {
+			if (e.target === removeAnswerBtn) {
+				removeElement(cloneContainer);
+			} else if (e.target === addAnswerBtn) {
+				addAnswer(cloneContainer);
+			} else if (e.target === copyBtn) {
+				copyBlock(cloneContainer);
+			}
+		});
+		creatorList.insertBefore(cloneContainer, container);
 	}
 
 	let addAnswer = (container) => {

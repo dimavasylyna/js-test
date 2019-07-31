@@ -33,9 +33,11 @@
 			// очищаємо розмітку
 			testList.innerHTML = ``;
 		}
+		if (!isValide(allDataObject)) {
+			return false;
+		}
 		// оновлюємо розмітку
 		generateQuestions();
-		console.log(testList);
 		console.log(testDataObject);
 
 		generateTestPage(allDataObject);
