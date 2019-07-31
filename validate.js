@@ -57,6 +57,7 @@ window.isValide = (obj) => {
 		}
 		return getResultCheck(numberErrorList);
 	}
+
 let checkObjQuestionRes = checkObjQuestion(obj);
 let checkObjRightAnswerRes = checkObjRightAnswer(obj);
 let checkObjAnswerRes = checkObjAnswer(obj);
@@ -67,32 +68,37 @@ let checkObjAnswerRes = checkObjAnswer(obj);
 // elementClass - клас елементів, які будуть перевірятися і їм же додаватиметься клас error
 // numberErrorListOfQuestionBlock - масив номерів невалідних питань
 let addClassError = (elementClass, numberErrorListOfQuestionBlock) => {
-	let questionBlockList = document.querySelectorAll(elementClass);
+	let questionBlockList = document.querySelectorAll(`.creator__item`);
 	// для оновлення стану, видаляємо всі класи error
-	questionBlockList.forEach((questionBlock)=>{
-		questionBlock.classList.remove(`error`);
+	document.querySelectorAll(`.error`).forEach((error)=>{
+		error.classList.remove(`error`);
 	});
 	numberErrorListOfQuestionBlock.forEach((num)=>{
-		questionBlockList[num - 1].classList.add(`error`);
+		// questionBlockList[num - 1].classList.add(`error`);
+		questionBlockList[num - 1].querySelectorAll(elementClass).forEach(el=>el.classList.add(`error`));
 	});
 	// скролимо до першого невалідного блоку
 	questionBlockList[numberErrorListOfQuestionBlock[0]-1].scrollIntoView({ behavior: "smooth" });;
 }
 
 
+
+
+
+
 	if (Object.keys(obj).length === 0 && obj.constructor === Object) {
 		alert(`Не створено жодного запитання!`);
 		return false;
 	} else if (!checkObjQuestionRes.result) {
-		addClassError(`.creator__item`, checkObjQuestionRes.numberErrorList);
+		addClassError(`.question-text`, checkObjQuestionRes.numberErrorList);
 		alert(`Заповніть поле запитання!`);
 		return false;
 	}  else if (!checkObjAnswerRes.result) {
-		addClassError(`.creator__item`, checkObjAnswerRes.numberErrorList);
+		addClassError(`.answer-text`, checkObjAnswerRes.numberErrorList);
 		alert(`Заповніть варіант відповіді!`);
 		return false;
 	} else if (!checkObjRightAnswerRes.result) {
-		addClassError(`.creator__item`, checkObjRightAnswerRes.numberErrorList);
+		addClassError(`.right-answer`, checkObjRightAnswerRes.numberErrorList);
 		alert(`Виберіть вірні відповіді!`);
 		return false;
 	} else {
