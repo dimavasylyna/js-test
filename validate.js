@@ -41,10 +41,21 @@ window.isValide = (obj) => {
 		}
 	}
 
-	
+	let showErrorMsg = (invalidObj) => {
+		document.querySelectorAll(`.error`).forEach((el)=>{el.classList.remove(`error`)});
+		for (let q in invalidObj) {
+			let numBlock = q.match(/\d+/)[0] - 1;
+			let questionBlockError = document.querySelectorAll(`.creator__item`)[numBlock];
+			
+			if (invalidObj[q].emptyQuestion) {
+				questionBlockError.querySelector(`.question-text`).classList.add(`error`);
+			}
+			
+		}
+	}
 
 	buildInvalidBlockObj(obj);
-
+	showErrorMsg(invalidObj);
 	if (Object.keys(invalidObj).length === 0 && invalidObj.constructor === Object) {
 		return true;
 	} else {
