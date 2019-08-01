@@ -1,6 +1,6 @@
 window.onload = function() {
 `use strict`
-	
+	let endTestBtn = document.querySelector(`.end-create-test`);
 	//// INTERFACE test generate
 	let addQuestionBtn = document.querySelector(`.add-question`);
 	// контейнер, де все відбувається
@@ -9,9 +9,17 @@ window.onload = function() {
 	let creatorItem = document.querySelector(`.template--creator-item`).content.querySelector(`li`);
 	let creatorAnswer = document.querySelector(`.template--answer`).content.querySelector(`li`);
 	
+	let addOrRemoveEndTestBtn = () => {
+		if (creatorList.innerHTML.trim().length > 0) {
+			endTestBtn.classList.remove(`hidden`);
+		} else {
+			endTestBtn.classList.add(`hidden`);
+		}
+	}
 
 	addQuestionBtn.addEventListener(`click`, function() {
 		  addQuestion();
+		addOrRemoveEndTestBtn();
 	});
 
 
@@ -27,6 +35,7 @@ window.onload = function() {
 			let copyBtn = this.querySelector(`.copy-answer`);
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
+				addOrRemoveEndTestBtn();
 			} else if (e.target === addAnswerBtn) {
 				addAnswer(this);
 			} else if (e.target === copyBtn) {
@@ -45,11 +54,12 @@ window.onload = function() {
 		let addAnswerBtn = cloneContainer.querySelector(`.add-answer`);
 		let copyBtn = cloneContainer.querySelector(`.copy-answer`);
 		let removeAnswerBtn = cloneContainer.querySelector(`.remove-answer`);
-
+		addOrRemoveEndTestBtn();
 
 		cloneContainer.addEventListener(`click`, function(e) {
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
+				addOrRemoveEndTestBtn();
 			} else if (e.target === removeAnswerBtn) {
 				removeElement(cloneContainer);
 			} else if (e.target === addAnswerBtn) {

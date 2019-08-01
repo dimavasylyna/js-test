@@ -1,4 +1,5 @@
 window.isValide = (obj) => {
+	// обєкт, куди зберігатимуться дані невалідних блоків
 	let invalidObj = {};
 	
 	
@@ -46,11 +47,28 @@ window.isValide = (obj) => {
 		for (let q in invalidObj) {
 			let numBlock = q.match(/\d+/)[0] - 1;
 			let questionBlockError = document.querySelectorAll(`.creator__item`)[numBlock];
-			
+			// перевірка поля запитання
 			if (invalidObj[q].emptyQuestion) {
 				questionBlockError.querySelector(`.question-text`).classList.add(`error`);
 			}
+			// перевірка поля варіантів відповіді
+			if (invalidObj[q].emptyAnswerIndex) {
+				invalidObj[q].emptyAnswerIndex.forEach(el=>{
+					questionBlockError.querySelectorAll(`.answer-text`)[el].classList.add(`error`);
+				});
+			}
+			// перевірка наявності відмічених вірних відповідей
+			if (invalidObj[q].emptyRightAnswer) {
+				questionBlockError.querySelectorAll(`.right-answer`).forEach((el)=>{
+					el.classList.add(`error`);
+				});
+			}
 			
+		}
+		// скролимо до першого невалідного блоку
+		let firstErrorEl = document.querySelector(`.error`)
+		if (firstErrorEl) {
+			firstErrorEl.scrollIntoView({behavior: "smooth", block: "center"});
 		}
 	}
 
