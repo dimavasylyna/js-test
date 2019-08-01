@@ -66,10 +66,10 @@ window.isValide = (obj) => {
 			
 		}
 		// скролимо до першого невалідного блоку
-		let firstErrorEl = document.querySelector(`.error`)
-		if (firstErrorEl) {
-			firstErrorEl.scrollIntoView({behavior: "smooth", block: "center"});
-		}
+		// let firstErrorEl = document.querySelector(`.error`)
+		// if (firstErrorEl) {
+		// 	firstErrorEl.scrollIntoView({behavior: "smooth", block: "center"});
+		// }
 	}
 
 	buildInvalidBlockObj(obj);

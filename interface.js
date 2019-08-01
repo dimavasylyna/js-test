@@ -48,27 +48,30 @@ window.onload = function() {
 		element.remove();
 	}
 
-	let copyBlock = (container) => {
-		let cloneContainer = container.cloneNode(true);
-		let removeQuestionBtn = cloneContainer.querySelector(`.remove-question`);
-		let addAnswerBtn = cloneContainer.querySelector(`.add-answer`);
-		let copyBtn = cloneContainer.querySelector(`.copy-answer`);
-		let removeAnswerBtn = cloneContainer.querySelector(`.remove-answer`);
-		addOrRemoveEndTestBtn();
+	// let pasteBefore = (elForPaste, elBeforePasteEl) => {
 
-		cloneContainer.addEventListener(`click`, function(e) {
+	// }
+
+	let copyBlock = (container) => {
+		// робимо клон блоку
+		let cloneContainer = container.cloneNode(true);
+		// вставляємо клон блоку в документ після його оригіналу
+		container.parentNode.insertBefore(cloneContainer, container.nextSibling);
+		// знаходимо клон блоку в документі
+		
+		cloneContainer.addEventListener(`click`, function(e){
+			let removeQuestionBtn = this.querySelector(`.remove-question`);
+			let addAnswerBtn = this.querySelector(`.add-answer`);
+			let copyBtn = this.querySelector(`.copy-answer`);
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
 				addOrRemoveEndTestBtn();
-			} else if (e.target === removeAnswerBtn) {
-				removeElement(cloneContainer);
 			} else if (e.target === addAnswerBtn) {
-				addAnswer(cloneContainer);
+				addAnswer(this);
 			} else if (e.target === copyBtn) {
-				copyBlock(cloneContainer);
+				copyBlock(this);
 			}
 		});
-		creatorList.insertBefore(cloneContainer, container);
 	}
 
 	let addAnswer = (container) => {
@@ -76,7 +79,7 @@ window.onload = function() {
 		let answerVariantList = creatorAnswer.cloneNode(true);
 		let removeAnswerBtn = answerVariantList.querySelector(`.remove-answer`);
 		addAnswerBtn.appendChild(answerVariantList); 
-
+		console.log(container);
 		// ставимо прослуховування кліку для створеного варіанту відповіді
 		answerVariantList.addEventListener(`click`, function(e) {
 			if (e.target === removeAnswerBtn) {
