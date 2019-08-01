@@ -44,6 +44,13 @@ body {
 	max-width: 300px;
 }
 
+.end-create-test {
+	position: fixed;
+	right: 0%;
+	transform: translateX(-40%);
+	top: 30%;
+}
+
 .answer-variant {
 	list-style-type: upper-alpha;
 }
