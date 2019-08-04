@@ -48,9 +48,6 @@ window.onload = function() {
 		element.remove();
 	}
 
-	// let pasteBefore = (elForPaste, elBeforePasteEl) => {
-
-	// }
 
 	let copyBlock = (container) => {
 		// робимо клон блоку
@@ -58,11 +55,11 @@ window.onload = function() {
 		// вставляємо клон блоку в документ після його оригіналу
 		container.parentNode.insertBefore(cloneContainer, container.nextSibling);
 		// знаходимо клон блоку в документі
-		
 		cloneContainer.addEventListener(`click`, function(e){
 			let removeQuestionBtn = this.querySelector(`.remove-question`);
 			let addAnswerBtn = this.querySelector(`.add-answer`);
 			let copyBtn = this.querySelector(`.copy-answer`);
+
 			if (e.target === removeQuestionBtn) {
 				removeElement(this);
 				addOrRemoveEndTestBtn();
@@ -72,22 +69,34 @@ window.onload = function() {
 				copyBlock(this);
 			}
 		});
+
+		//  при клонуванні блоку з уже існуючими варіантами відповіді, навішуємо
+		//  на їх кнопки також подію для видалення
+		let copyAnswerList = cloneContainer.querySelectorAll(`.remove-answer`);
+		copyAnswerList.forEach(btn=>{
+			btn.addEventListener(`click`, function(e){
+				let answerItem = this.closest(`.answer`);
+				removeElement(answerItem);
+			});
+		});
 	}
 
 	let addAnswer = (container) => {
-		let addAnswerBtn = container.querySelector(`.answer-variant`);
-		let answerVariantList = creatorAnswer.cloneNode(true);
-		let removeAnswerBtn = answerVariantList.querySelector(`.remove-answer`);
-		addAnswerBtn.appendChild(answerVariantList); 
-		console.log(container);
+		let addAnswerList = container.querySelector(`.answer-variant`);
+		let answerVariantItem = creatorAnswer.cloneNode(true);
+		let removeAnswerBtn = answerVariantItem.querySelector(`.remove-answer`);
+		addAnswerList.appendChild(answerVariantItem); 
+		
 		// ставимо прослуховування кліку для створеного варіанту відповіді
-		answerVariantList.addEventListener(`click`, function(e) {
+		answerVariantItem.addEventListener(`click`, function(e) {
 			if (e.target === removeAnswerBtn) {
 				removeElement(this);
 			}
 		});
 	}
 
+
+	
 
 	
 
